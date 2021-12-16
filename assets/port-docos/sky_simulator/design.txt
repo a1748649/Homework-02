@@ -1,0 +1,190 @@
+
+
+Design
+
+Our project uses a planet abstract class, and 2 types of telescopes, each using an interface to construct a simulated star-gazing environment. Telescopes can come in two different types. Reflecting telescopes (have a large mirror at the base that is used to bend and focus light rays) and refracting telescopes (which use glass lenses to refract light to bend and focus the rays). On the other hand, planet's come in 3 major categories. Gas giants, rocky planets, and dwarf planets. Each planet has slightly different behaviour, as in viewing them allows this different behaviour to be expressed by planets themselves. For example, due to the properties of gas giants, they are large enough objects to be able to distinguish colour using hobby telescopes of the reflecting type, as these are cheaper and more accessible for high angular resolution as hobby telescopes. Refracting telescopes have small angular resolution, but can still see a lot of the solar system! Jupiter will often look orange-dirty brown while Saturn is more of a pale cream through a reflecting telescope, and will just wash out to white in a refracting telescope. Rocky planets are too small and with hobby telescopes, colour is often lost. Therefore, looking at the rocky planets will just  result in a white washed dot. Earth's closest dwarf planet will be included for completeness, but is too far away to be visible by either type of hobby telescope in regards to colour.
+
+To add to the complexity of our project, we have factored in geographical position on the Earth as well as the astrological position of the planets. To do this, we had to pick not just a location on the surface of the Earth, but a time, as well as a date. We decided an appropriate date would be the marking day in week 11, so we used online star maps to extract the rise and fall times of the planets on this day, as well as which planets are not viewable due to season.
+
+
+Classes-
+
+-(Interface) Look
+-Newtonian Reflector (using Look)
+-Galilean Refractor (using Look)
+
+Planet (abstract, parent)
+-Gas giant (child)
+-Rocky planet (child)
+-Dwarf planet (child)
+
+
+Telescopes will have limited functionality. It's only real behaviour apart from getters is its look function. This was designed as an interface due to its common functionality between telescope types. It's of return type boolian, and must be passed a string that matches one of the planets in the solar system. This will be implemented by checking against an array of planet names. It will check the data table to see if at that particular time the planet is visible, and if so, it will then return details based on the planet itself (rocky gassy etc.) and the type of telescope being used. Reflector telescopes are fundamentally more powerful than refractor telescopes, as they can be made much larger due to lens issues at larger scales. Therefore, only the reflector telescope will be able to pick up colour details of gas giants.
+
+Planet will hold unique details including type, colour, rise time, and fall time. These states will only be accessible through well defined methods, of which only certain details will be accessible by certain telescopes. Look is an interface of telescope, and the basis of how look interacts with the virtual function printDetails of planet is important as it represents object communication and vetting based on type. This was quite an important, yet complex component of our design to carefully consider.
+
+
+
+
+Memory allocation from stack and the heap
+
+•Arrays: Pointers to planets will be stored in arrays on the stack. These pointers on the stack will point to planet objects on the heap that represent the solar system.
+
+•Strings: Planet names in the interface will need to be entered and handled as strings.
+
+•Objects: Planet (rocky, gassy, or dwarf) and telescope (Reflector or Refractor).
+
+User Input and Output
+
+•I/O of different data types: Command-line entering of how many planets you want to view, as well as names of objects to look for.
+
+Object-oriented programming and design
+
+•Polymorphism and Inheritance: Planet represents inheritance, while the telescopes (Reflector or Refractor) use an interface to look at planets.
+
+•Abstract classes: this feature will be hero'd by the planet class, as its pure virtual behaviour printDetails() will have different implementations for each different type of planet.
+
+
+
+Data being used...
+
+	OCTOBER 20TH, ADELAIDE SA
+
+	Rise.	        Set
+Mercury	05:48am	11:59	18:10pm      X not visible, hugs too near the sun
+Venus	08:44am	16:05	23:26pm
+Mars	06:20am	12:46	19:11pm      X not visible, wrong side of S.S.
+Jupiter	14:14pm	21:01	03:48am
+Saturn	12:57pm	19:57	02:57am
+Uranus	20:47pm	02:05	07:24am
+Neptune	16:33pm	22:49	05:05am
+
+
+
+
+
+
+
+Look (interface)
+
+states:
+NULL (as interface)
+
+behaviours:
+virtual bool look(string): returns true or false based on the implementation.
+
+
+
+
+Galilean Refractor (using Look interface)
+
+states:
+string tele_type: set in constructor
+
+behaviours:
+virtual bool look(planet): implemented from interface
+string getType(): returns telescope type
+
+
+
+
+Newtonian Reflector (using Look interface)
+
+states:
+string tele_type: set in constructor
+
+behaviours:
+virtual bool look(planet): implemented from interface
+string getType(): returns telescope type
+
+
+
+
+Planet (super class)
+
+states:
+std::string name:  name of planet
+std::string type:  e.g. gas giant, rocky, or dwarf planet
+std::string colour;
+std::string rise_time:  string as need to enter colon in between
+std::string fall_time;
+
+behaviours:
+virtual std::string getName();
+virtual std::string getType();
+virtual std::string getColour();
+virtual std::string getRT();
+virtual std::string getFT();
+virtual void printDetails(std::string planet_name, std::string tele_type): 	
+			    
+
+
+Gas giant (child class)
+
+states:
+NULL
+
+behaviour:
+implementations of all virtual functions above. As gas giant, if being 
+looked at by a reflector, will be able to see colour & type. If viewing
+through and refractor, as they are weaker telescopes, colour won't be visible.
+
+rocky planet (child class):
+States: NULL
+
+behaviours: implementations of all virtual functions above. Mars and mercury will have an implementation for completeness, but will not be able to be viewed. Venus will be the only visible rocky planet, but as not even hobby sized reflectors can distinguish colour of terrestrial planets (colour of these planets gets washed out due to lack of angular resolution) colour wont be visible
+
+Dwarf planet (child class)
+
+states: NULL
+
+behaviours: implementations of all virtual functions above. Pluto will be the only dwarf planet included, and unfortunately due to size its colour will not be able to be viewed.
+
+
+
+
+
+User Interface (example)
+
+It is 9:30 pm in Adelaide South Australia... Do you want to:
+1. Check visible planets
+2. Select a telescope
+Enter 1 or 2 to proceed
+1
+
+Printing details... 
+
+
+Do you want to use a Newtonian Reflector telescope, or a Galilean Refractor telescope. Type 1 or 2
+1
+
+What Planet do you want to look at in the solar system
+Saturn
+	//Depending on planet and telescope properties, only certain states are accessible
+Do you want to look at another object? Press 1 for yes, 0 for no
+0
+
+
+
+Code style
+We will use the Google C++ style guide. Comments will consistently use // notation. Comments will be made above noteworthy sections of code that are not inherently intuitive to describe what the body of code performs below. Constructors, destructors, states and behaviours will be labelled in header files and in cpp files if the document is extensive enough. Header files will be self-contained, and #define guards will be included to ensure multiple inclusions aren't performed. Namespaces will be used in everything other than .h files, with the namespace being "namespace std". 4 space tab indentation will be used.
+
+
+Testing plan
+
+Unit testing will be thoroughly performed throughout the coding phase. As a new function or class is added, it will be thoroughly tested around either boundary values, or unexpected inputs. Makefile testing will be used at the end to test the whole functionality of the project together. This will use an expected output file that will be written by us based on what the output should be. This will be compared to an automated output file that will be made using automated input/output testing practices taught in lectures. This testing will be less extensive, in the sense that the unit testing will have already focused on using boundary/unexpected inputs. However, multiple makefile test documents will be made to test functionality more extensively than just for one input scenario. Unit testing plan will use assure statement style testing in isolated environments.
+
+
+Schedule plan
+
+stretch goal: our goal is to have the classes fleshed out by the end of week 8/start of holidays, with proper functionality of the entire program early in the uni holidays. If we can meet these goals, we will attempt to extend the program to be able to change the time in the night. For example, if its 9:00 pm and Saturn doesn't rise until 11:30 pm, you will have an option in the interface to wait x hours. According to current design, this will be one of the behaviours of the telescopes. More realistically, we could construct a person class that interacts with the telescope class, and the person could wait x hours. We'll have to see which feature works better with our classes we have constructed when we get to this stage.
+
+By week 9, we hope to have a completed project ready to be handed in 2 weeks early, if this is not possible we will keep working on extending the complexity of our code. This may include using azimuthal and altitude angles to find the objects, or it may be able to print these angles based on after you find the object. E.g. at 11:30 pm, after you've found Jupiter in the sky, among other details printed from the planets will be a real-time calculation of position based on the hypothetical date, time and location on the planet you are observing from. This may get too complex in the math involved, but if not would be a really cool feature of our program. Adding this will likely take the remaining 2 weeks.
+
+Currently in week 9, we have met our planned goals. We now attempt to extend the program to include our stretch goal, while simultaneously attempting to make our code more efficient. Timing the run time of an automated input Makefile now, versus after our effieciency edits will give us a quantitative figure to describe our increase in effciency. To do this, we will do 1 viewing of a planet, lets say Saturn, with automated input testing so user entry times dont get included in the timing of the code. This will ensure both timing tests are fair in reference to eachother. After doing this on October 12th, we found our code ran at between 120 microseconds all the way to 800+ microseconds. To get a reasonable figure, ill take an average of 20 samples and provide an average and a standard deviation. Doing this results in 169.85 +/- 26.91 microseconds from the top of our main program to the bottom.
+
+In the next and final week, Sam will increase the robustness of unit testing to make it more extensive and inclusive, while Jackson will work on refining efficincy improvements. Together, we will both work on commenting extensively what still needs to be commented about according to the google C++ style guide. If we achieve both of the above tasks this week we will try and achieve our stretch goals early next week before marking. This will be done through our main program at the bottom of our interface 'while loop', where an option to change or not change the time will be presented to the user. 
+
+After re-working how data was stored in the program, and using object orientred approaches to access more of the data rather than all objects holding all the neccessary data of each other. No marginal improvement in efficiency was noticed, with 20 averages resulting in the code running in around 186+/- 32.58 microseconds. As standard deviation overlaps averages, this essentially means there was no large scale change in average efficiency despite improvements in code. This could be improved by taking a much larger sample size, but essentially it suggests that most of the computers run-time is taken up in other elements of the programs running. Continuing with the program, we attempted to meet our stretch goals and were successful. We attempted to use a human class to integrate with the system, but due to the time being integrated through the main program already we found this to be difficult. To get around this, we decided to include time as a variable passed from the main to the telescope, and from the telescope to the planet objects. 
+
+

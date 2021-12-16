@@ -1,0 +1,18 @@
+
+
+
+It is 21:00, on October 20th, in Adelaide South Australia... Do you want to:
+1. Check visible planets
+2. Select a telescope
+Enter 1 or 2 to proceed
+Do you want to use a Newtonian Reflector telescope, or a Galilean Refractor telescope. Type 1 or 2
+
+What Planet do you want to look at in the solar system
+
+
+looking for Saturn....
+Wow! Saturn's rings shine an amazing white arched over the planet.
+Saturn is a beautiful cream tonight.
+
+
+Do you want to look at another object? Press 1 for yes, 0 for no

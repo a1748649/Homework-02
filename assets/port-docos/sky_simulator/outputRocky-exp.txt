@@ -1,0 +1,50 @@
+
+
+
+It is 21:30, on October 20th, in Adelaide South Australia... Do you want to:
+1. Check visible planets
+2. Select a telescope
+Enter 1 or 2 to proceed
+Do you want to use a Newtonian Reflector telescope, or a Galilean Refractor telescope. Type 1 or 2
+
+What Planet do you want to look at in the solar system
+
+
+looking for Venus....
+The Celestial object is visible!
+
+Venus's colour seems to be washed out, but still shines with a beautiful white tonight.
+
+
+Do you want to look at another object? Press 1 for yes, 0 for no
+Do you want to change the time? Press 1 for yes and 0 for no
+It is 21:30, on October 20th, in Adelaide South Australia... Do you want to:
+1. Check visible planets
+2. Select a telescope
+Enter 1 or 2 to proceed
+Do you want to use a Newtonian Reflector telescope, or a Galilean Refractor telescope. Type 1 or 2
+What Planet do you want to look at in the solar system
+
+
+looking for Venus....
+The Celestial object is visible!
+
+Venus's colour seems to be washed out, but still shines with a beautiful white tonight.
+
+
+Do you want to look at another object? Press 1 for yes, 0 for no
+Do you want to change the time? Press 1 for yes and 0 for no
+Enter a new time to observe from, if a morning time, enter as 24 hour time e.g. 01:30
+It is 23:45, on October 20th, in Adelaide South Australia... Do you want to:
+1. Check visible planets
+2. Select a telescope
+Enter 1 or 2 to proceed
+Do you want to use a Newtonian Reflector telescope, or a Galilean Refractor telescope. Type 1 or 2
+
+What Planet do you want to look at in the solar system
+
+
+looking for Venus....
+Cant find planet anywhere, it must be below the horizon!
+Do you want to look at another object? Press 1 for yes, 0 for no
+exiting program...
