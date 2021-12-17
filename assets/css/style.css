@@ -1,3 +1,9 @@
+main{
+  background-color: #328FA8;
+  margin: 10px;
+  color: white;
+}
+
 header{
   text-align: start;
   padding: 4%;
@@ -24,7 +30,8 @@ h2{
   right: 0;
 }
 .wrapper1 .sub1{
- 
+  background-color: #328FA8;
+  margin: 10px;
   float: right;
 
 
@@ -33,7 +40,8 @@ h2{
 
 .wrapper2 .sub2{
   float: left;
-  
+  background-color: #328FA8;
+  margin: 10px;
 
   width: 40%;
 }

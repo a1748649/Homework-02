@@ -1,0 +1,254 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2636
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Times-Roman;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+{\info
+{\title Jupyter Notebook}}\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs24 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 import numpy as np\
+j=0\
+total_price=0\
+\
+##Below is the list as of today. Empty spaces in rows are left for items still to be added. Next row below annotates\
+##price of item. Any unknowns decimal places are left off. Below that is the row the item is located in \
+##(or close enough/needs to be bought before or after shops). I go down eisles that have higghest number then \
+##descend\
+shopping_essentials=['milk'            , 'weetbix'             , 'water'      ,'icecream'    , 'binbags'       ,\
+                     'rubbing alcohol' ,'sandwich bags'        , 'dish_tabs'  ,'cream'       , 'natural yogurt',\
+                     'hand_soap'       , 'toilet paper'        ,'cooking wine','paper towel' , 'toilet cleaner',\
+                     'sanitiser'       , 'cheese'              ,'mold remover','spinach'     ,'cherry tomatoes',\
+                     'cucumber'        , 'red onion'           ,'feta cheese' ,'avocado'     ,'ginger'         ,\
+                     'red wine vinegar','extra virgin oliveoil','garlic'      ,'onion'       ,'chilli'         ,\
+                     'toothpaste'      , 'floss'               ,'mouthwash'   ,'deoderent'   ,'salt shaker'    , \
+                     'pepper shaker'   , 'zuchini'             ,'mushrooms'   ,'eggplant'    ,'chicken stock'  ,\
+                     'rock salt'       , 'toothbrush head'     ,'coconut milk','main meal 1' , 'main meal 2'   ,]\
+\
+price=[              4.85              , 4.99                  , 4.25         , 10.50        , 5            \
+       ,             11.98             , 2.29                  , 5.50         , 5            , 5\
+       ,             15                , 6.99                  , 2.50         , 7.00         , 5                             \
+       ,             5                 , 7.30                  , 5            , 0.34         , 0.90           \
+       ,             3.49              , 0.97                  , 5            , 1.69         , 3.70\
+       ,             3.49              , 5                     , 5            , 0.6          , 5\
+       ,             2.99              , 5                     , 5            , 5            , 4.50 \
+       ,             4.50              , 1.47                  , 1.78         , 1.80         , 5              \
+       ,             5                 , 5                     , 2.21         , 8.64         , 8.64] \
+\
+\
+eisle=[              7                 , 6                     , 4            , 7            , 5            \
+       ,             10                , 5                     , 7            , 7            , 7\
+       ,             2                 , 2                     , 0            , 2            , 1                            \
+       ,             1                 , 8                     , 1            , 8            , 8           \
+       ,             8                 , 8                     , 7            , 8            , 8\
+       ,             3                 , 3                     , 8            , 8            , 8\
+       ,             2                 , 2                     , 2            , 2            , 4 \
+       ,             4                 , 8                     , 8            , 8            , 4\
+       ,             4                 , 2                     , 4            , 4            , 4] \
+\
+##This vector turns a 0 into a 1 if the item is needed. Helps for soughting algorithem later\
+quant_needed=[       0                 , 0                     , 0            , 0            , 0            \
+       ,             0                 , 0                     , 0            , 0            , 0\
+       ,             0                 , 0                     , 0            , 0            , 0                            \
+       ,             0                 , 0                     , 0            , 0            , 0           \
+       ,             0                 , 0                     , 0            , 0            , 0\
+       ,             0                 , 0                     , 0            , 0            , 0\
+       ,             0                 , 0                     , 0            , 0            , 0 \
+       ,             0                 , 0                     , 0            , 0            , 0\
+       ,             0                 , 0                     , 0            , 0            , 0] \
+\
+\
+\
+\
+print('Do you want a fresh shopping list or to continue? 1 or 2')\
+query_wipe=input()\
+\
+##this uses user input to decide weather to wipe the list made, or continue with what is previously written.\
+##in the output document from last time\
+if query_wipe=='1':\
+    filename="myOutFile.txt"\
+    filename = open("myOutFile.txt", "w")   #opens fresh document\
+    \
+#if the if command is not met then it continues writing on previous document by default\
+\
+print('Do you want to see a full shopping list or add something in particular. Press 3 to wipe. Type 1, 2 or 3')\
+l_or_p=input()\
+\
+\
+needed_shopping=np.zeros(np.size(shopping_essentials))\
+if l_or_p=='1':   ##if input is 1, goes item by item asking if youve got it\
+             \
+  \
+    for i in range(np.size(shopping_essentials)):\
+        print('Got ',shopping_essentials[i],'?')\
+        answer=input()\
+        \
+        if answer=='yes':\
+            quant_needed[i]=0\
+            \
+                \
+                \
+            \
+        else:\
+            #changes needed quantity to 1 if item is needed\
+            quant_needed[i]=1\
+            #adds item to output file\
+            filename="myOutFile.txt"\
+            filename = open("myOutFile.txt", "a") ##a means edit mode, w means fresh\
+            ##writes to outfile the item\
+            filename.write(shopping_essentials[i])\
+            filename.write('\\n')\
+            filename.close()\
+            #Updates total price\
+            total_price=total_price+price[i]\
+\
+    \
+                   \
+    \
+#if answer was 2 as in enter particular item, asks how many items to enter, and checks input against shopping list           \
+elif l_or_p=='2':\
+    add_num=0\
+    \
+    #sets add_num to value entered as input\
+    print('How many items do you want to enter?')\
+    add_num=int(input())\
+   \
+    \
+    for i in range(add_num):\
+        if i==add_num:\
+            filename="myOutFile.txt"\
+            filename = open("myOutFile.txt", "a")\
+            #writing to the document\
+            filename.write("Total price is: ")\
+            filename.write(total_price)\
+            filename.write('\\n')               \
+            filename.close()\
+            \
+        print('Enter an item to check if its in the list?')\
+        ##allocates string to input\
+        query_check=input()\
+        \
+        #This for loop below goes through the whole list, and checks the string input against the whole list\
+        for i in range(np.size(shopping_essentials)):\
+            if query_check==shopping_essentials[i]:\
+                #item is in list, adds to the shopping list by writing to document\
+                quant_needed[i]=1\
+                filename="myOutFile.txt"\
+                filename = open("myOutFile.txt", "a")\
+                #writing to the document\
+                filename.write(shopping_essentials[i])\
+                filename.write('\\n')\
+                filename.close()\
+                #price updated\
+                total_price=total_price+price[i]\
+\
+elif l_or_p=='3':\
+    ##Option 3 wipes list\
+    filename="myOutFile.txt"\
+    filename = open("myOutFile.txt", "w")      \
+    \
+    \
+##number that dictates how many items are in list total\
+quantity=0\
+for i in range(45):    \
+    if quant_needed[i]==1:\
+        quantity=quantity+1\
+\
+\
+\
+ln[2]\
+##seperate function for printing\
+print('Values successfully entered.')\
+\
+#alocates string to input as yes or no\
+print('Do you want to see the list? Enter yes or no')\
+list_check=input()\
+\
+if list_check=="yes":\
+    #Reading off a document\
+    with open('myOutfile.txt', 'r') as reader:\
+        print('')\
+        #Read & print the entire file\
+        print(reader.read())\
+        #Print price\
+        print('total price comes to:', total_price)\
+    \
+\
+        \
+        \
+ln[3]\
+\
+##Sorting array based on eisle number.\
+#Here, we need to make a copy array of our shopping list, and side by side with the eisle list,\
+#we need to sort the eisle list from largest to smallest (my personal route). By mirroring these changes \
+#in the list, we sort the list itself\
+\
+shopping_copy=      ['milk'            , 'weetbix'             , 'water'      ,'icecream'    , 'binbags'       ,\
+                     'rubbing alcohol' ,'sandwich bags'        , 'dish_tabs'  ,'cream'       , 'natural yogurt',\
+                     'hand_soap'       , 'toilet paper'        ,'cooking wine','paper towel' , 'toilet cleaner',\
+                     'sanitiser'       , 'cheese'              ,'mold remover','spinach'     ,'cherry tomatoes',\
+                     'cucumber'        , 'red onion'           ,'feta cheese' ,'avocado'     ,'ginger'         ,\
+                     'red wine vinegar','extra virgin oliveoil','garlic'      ,'onion'       ,'chilli'         ,\
+                     'toothpaste'      , 'floss'               ,'mouthwash'   ,'deoderent'   ,'salt shaker'    , \
+                     'pepper shaker'   , 'zuchini'             ,'mushrooms'   ,'eggplant'    ,'chicken stock'  ,\
+                     'rock salt'       , 'toothbrush head'     ,'coconut milk','main meal 1' , 'main meal 2'   ,]\
+\
+eisle_copy=[             7                 , 6                     , 4            , 7            , 5            \
+           ,             10                , 5                     , 7            , 7            , 7\
+           ,             2                 , 2                     , 0            , 2            , 1                            \
+           ,             1                 , 8                     , 1            , 8            , 8           \
+           ,             8                 , 8                     , 7            , 8            , 8\
+           ,             3                 , 3                     , 8            , 8            , 8\
+           ,             2                 , 2                     , 2            , 2            , 4 \
+           ,             4                 , 8                     , 8            , 8            , 4\
+           ,             4                 , 2                     , 4            , 4            , 4] \
+\
+\
+\
+#quantity matrix is carried over from previous functions above, with detailed entries\
+quant_copy=quant_needed\
+\
+#Counts total amount of items for later for loop\
+total_quant=0\
+for i in range(45):\
+    if quant_copy[i]==1:\
+        total_quant = total_quant+1\
+\
+#Makes eisler array and index array for sorting\
+eisle_array = [0] * total_quant\
+index_array = [0] * total_quant\
+\
+#Counter used for indexing entries into array within for loop\
+counter = 0\
+for i in range(45):\
+    if quant_copy[i]==1:\
+        eisle_array[counter]=eisle[i]\
+        index_array[counter]=i\
+        counter = counter + 1\
+        \
+        \
+        \
+#Nested loop to check every value against each other\
+for i in range(total_quant):\
+    for j in range(total_quant):\
+        #This ensures array is progressively checked, and no double-back occurs\
+        #If met, skips current loop iteration\
+        if j < i:\
+            continue\
+         #Mirrored sorting of eisle array and index array...\
+        if eisle_array[i]<eisle_array[j]:\
+            t=eisle_array[i]\
+            eisle_array[i]=eisle_array[j]\
+            eisle_array[j]=t\
+            \
+            t=index_array[i]\
+            index_array[i]=index_array[j]\
+            index_array[j]=t\
+\
+print("\\nSorted List is:\\n")            \
+for i in range(total_quant):\
+    print(shopping_copy[index_array[i]])\
+            \
+            \
+            }
