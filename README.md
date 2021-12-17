@@ -10,4 +10,5 @@
 - in my own time, i tutor C++ programming to kids. I wanted to use what I was learning in CSS and HTML to build a landing site for this. This is also imbedded.
 
 3. Shopping list generator
-- using python I made a shopping list for personal use.
+- using python I made a shopping list for personal use. It takes user input to either run through
+a whole list, or add a particular item
